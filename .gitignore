@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Entornos virtuales
+.venv/
+venv/
+env/
+ENV/
+
+# IDEs (Positron, VS Code, PyCharm)
+.positron/
+.vscode/
+.idea/
+.project
+.settings/
+
+# Datos y archivos temporales
+*.log
+.DS_Store
