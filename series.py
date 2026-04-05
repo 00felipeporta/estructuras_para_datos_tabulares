@@ -44,9 +44,7 @@ class Series:
     def len(self):
         return len(self._data)
 
-    ######################################################################################
-    #                                METODOS DE CLASE                                    #
-    ######################################################################################
+    # Métodos de clase
 
     # Segun el tipo de x y el dtype, devuelve x, x convertido o error
     def _validador(self, x):
@@ -106,9 +104,8 @@ class Series:
             else: 
                 raise TypeError("Las listas deben ser del mismo tamaño")
     
-    #############################################################################################################
-    #                                               init                                                        #
-    #############################################################################################################
+    # Inicialización
+
     def __init__(self, data, name = "", dtype = None):   
     
         self.name = name
@@ -123,7 +120,7 @@ class Series:
         
         
         if self.dtype is None:
-            #------------------ Si no se definio ningun dtype---------------------
+            #Caso 1: Si no se definio ningun dtype
             # Si todos los elementos que no son None son del mismo tipo (y es valido) los asignamos a self._data y le asignamos el dtype y tipo correspondientes
             tipos_data = list(set(type(x) for x in data if x is not None)) # Convertimos a lista para utilizar indexado despues
             if len(tipos_data) == 1 and tipos_data[0] in Series._mapeo.values():
@@ -148,7 +145,7 @@ class Series:
                 raise TypeError("Los datos que no son None tienen que ser todos del mismo tipo. Solo se puede mezclar int y float")
 
         else:
-            #------------------ Si el usuario ingresó un dtype no None ---------------------           
+            # Caso 2: Si el usuario ingresó un dtype no None
             # Si todos los elementos son del mismo tipo asignamos data a self._data
             # Hacemos la comparacion de esta manera y no con isinstance porque si se puede interpretar que los enteros son booleanos
             if self._tipo in [bool, str] and all(x is None or type(x) is self._tipo for x in data): 
@@ -165,9 +162,7 @@ class Series:
                     "Los datos que no son None tienen que ser todos del mismo tipo y coincidentes con dtype.\n Sólo se pueden mezclar int y float."
                 )
 
-#####################################################################################
-#                          METODOS PARA MANIPULAR DATOS                             #
-#####################################################################################
+    # Métodos para manipulación de datos
 
     # Devuelve una nueva serie, idéntica a la original
     def clone(self):
@@ -275,9 +270,8 @@ class Series:
         # Devolvemos la lista con los Nones al final
         return indices + indices_none
 
-#######################################################################################
-#                             Métodos para calcular agregaciones                      #
-#######################################################################################
+    # Métodos para calcular agregaciones
+
     # Para todos los metodos verificamos primero estar trabajando con series numericas y filtramos los none
     # El valor más pequeño.
     def min(self):
@@ -325,10 +319,9 @@ class Series:
         varianza = self.var()           
         return varianza ** 0.5
 
-#######################################################################################
-#                             METODOS ESPECIALES                                      #
-#######################################################################################
-#------------------------------- ARITMETICOS------------------------------------------#
+    # Métodos especiales
+    
+    # Aritméticos
     # Operaciones de comparacion
     def __eq__(self, other): # Igual a
         return self._operar(other, lambda a, b: a == b)
@@ -353,7 +346,7 @@ class Series:
     def __pow__(self, other): # Potencia
         return self._operar(other, lambda a, b: a ** b, aritmetico = True)        
 
-#--------------------------------ACCESO E ITERACION-----------------------------------#
+    # Métodos de acceso e iteración
         
     # Representación textual
     def __repr__(self):
@@ -392,5 +385,3 @@ class Series:
     # Permite iterar sobre los elementos de la serie
     def __iter__(self):
         return iter(self._data)
-        
-###################################### # fin # #########################################
