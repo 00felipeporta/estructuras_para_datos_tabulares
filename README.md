@@ -1,4 +1,3 @@
-Custom DataFrame
 Este proyecto es una implementación propia de estructuras de datos para manipular tablas en Python. No utiliza librerías externas, todo el comportamiento de las clases Series y DataFrame está construido desde cero utilizando la biblioteca estándar.
 
 Está pensado para demostrar cómo gestionar tipos de datos, validaciones de longitud y operaciones de filtrado u ordenamiento manteniendo la integridad de las filas.
